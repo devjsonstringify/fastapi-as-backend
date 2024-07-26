@@ -1,7 +1,13 @@
 import uvicorn
 
 from fastapi import FastAPI
+from database import Base, engine
 
+# Create the database
+Base.metadata.create_all(engine)
+
+# Create the database
+Base.metadata.create_all(engine)
 app = FastAPI()
 
 @app.get("/")
