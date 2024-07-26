@@ -3,7 +3,7 @@
 
 - [ ] Basic CRUD Operations
 - [ ] User authentication and authorization
-- [ ] Database integration
+- [x] Database integration
 - [ ] API documentation
 - [ ] Error handling
 - [ ] Dependency injection
