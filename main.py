@@ -2,9 +2,7 @@ import uvicorn
 
 from fastapi import FastAPI
 from database import Base, engine
-
-# Create the database
-Base.metadata.create_all(engine)
+from pydantic import BaseModel
 
 # Create the database
 Base.metadata.create_all(engine)
