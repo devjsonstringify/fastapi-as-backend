@@ -1,9 +1,14 @@
 import uvicorn
 
-from fastapi import FastAPI
-from database import Base, engine
+from fastapi import FastAPI, status
+from database import Base, engine, ToDo
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
+# Create ToDoRequest Base Model
+class ToDoRequest(BaseModel):
+    task: str
+    
 # Create the database
 Base.metadata.create_all(engine)
 app = FastAPI()
@@ -18,10 +23,27 @@ def root():
     """_summary_"""
     return "todooo"
 
-@app.post("/todo")
-def create_todo():
+@app.post("/todo", status_code=status.HTTP_201_CREATED, description="create todo.")
+def create_todo(todo: ToDoRequest):
     """_summary_"""
-    return "create todo item"
+     # create a new database session
+    session = Session(bind=engine, expire_on_commit=False)
+
+    # create an instance of the ToDo database model
+    tododb = ToDo(task = todo.task)
+
+    # add it to the session and commit it
+    session.add(tododb)
+    session.commit()
+
+    # grab the id given to the object from the database
+    id = tododb.id
+
+    # close the session
+    session.close()
+
+    # return the id
+    return f"created todo item with id {id}"
 
 @app.get("/todo/{id}")
 def read_todo(id: int):
