@@ -84,10 +84,26 @@ def update_todo(id: int, task: str):
 
     return todo
 
-@app.delete("/todo/{id}")
+@app.delete("/todo/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_todo(id: int):
     """_summary_"""
-    return "delete todo item with id {id}"
+
+    # create a new database session
+    session = Session(bind=engine, expire_on_commit=False)
+
+    # get the todo item with the given id
+    todo = session.query(ToDo).get(id)
+
+    # if todo item with given id exists, delete it from the database. Otherwise raise 404 error
+    if todo:
+        session.delete(todo)
+        session.commit()
+        session.close()
+    else:
+        raise HTTPException(status_code=404, detail=f"todo item with id {id} not found")
+
+    return None
+
 
 @app.get("/todo")
 def read_todo_list():
