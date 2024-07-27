@@ -9,7 +9,7 @@
 - [ ] Dependency injection
 - [ ] Configuration management
 - [ ] Testing
-- [ ] Middleware
+- [x] Middleware
 - [ ] Data validation and serialization
 - [ ] Rate limiting
 - [ ] Asynchronous programming

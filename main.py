@@ -5,12 +5,14 @@ from sqlalchemy.orm import Session
 from database import Base, engine
 import models
 import schemas
+from middleware import LoggingMiddleware
 
     
 # Create the database
 Base.metadata.create_all(engine)
 app = FastAPI()
-
+app.add_middleware(LoggingMiddleware)
+ 
 @app.get("/")
 def read_root():
     """_summary_"""
