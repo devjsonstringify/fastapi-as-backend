@@ -2,7 +2,7 @@
 # These are the features good to have in a project according to A.I 
 
 - [x] Basic CRUD Operations 
-- [ ] User authentication and authorization
+- [x] User authentication and authorization
 - [x] Database integration
 - [ ] API documentation
 - [ ] Error handling
@@ -16,3 +16,5 @@
 
 
 sources: https://www.gormanalysis.com/blog/building-a-simple-crud-application-with-fastapi/ by https://github.com/ben519/todooo
+
+User authentication and authorization: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#check-it
